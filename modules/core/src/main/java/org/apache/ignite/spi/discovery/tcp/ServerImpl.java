@@ -2140,8 +2140,6 @@ class ServerImpl extends TcpDiscoveryImpl {
 
             this.discardId = discardId;
             this.customDiscardId = customDiscardId;
-
-            cleanup();
         }
 
         /**
@@ -2163,41 +2161,41 @@ class ServerImpl extends TcpDiscoveryImpl {
          *
          */
         void cleanup() {
-//            Iterator<TcpDiscoveryAbstractMessage> msgIt = msgs.iterator();
-//
-//            boolean skipMsg = discardId != null;
-//            boolean skipCustomMsg = customDiscardId != null;
-//
-//            while (msgIt.hasNext()) {
-//                TcpDiscoveryAbstractMessage msg0 = msgIt.next();
-//
-//                if (msg0 instanceof TcpDiscoveryCustomEventMessage) {
-//                    if (skipCustomMsg) {
-//                        assert customDiscardId != null;
-//
-//                        if (F.eq(customDiscardId, msg0.id()))
-//                            skipCustomMsg = false;
-//                        else
-//                            msgIt.remove();
-//
-//                        continue;
-//                    }
-//                }
-//                else {
-//                    if (skipMsg) {
-//                        assert discardId != null;
-//
-//                        if (F.eq(discardId, msg0.id()))
-//                            skipMsg = false;
-//                        else
-//                            msgIt.remove();
-//
-//                        continue;
-//                    }
-//                }
-//
-//                break;
-//            }
+            Iterator<TcpDiscoveryAbstractMessage> msgIt = msgs.iterator();
+
+            boolean skipMsg = discardId != null;
+            boolean skipCustomMsg = customDiscardId != null;
+
+            while (msgIt.hasNext()) {
+                TcpDiscoveryAbstractMessage msg0 = msgIt.next();
+
+                if (msg0 instanceof TcpDiscoveryCustomEventMessage) {
+                    if (skipCustomMsg) {
+                        assert customDiscardId != null;
+
+                        if (F.eq(customDiscardId, msg0.id()))
+                            skipCustomMsg = false;
+                        else
+                            msgIt.remove();
+
+                        continue;
+                    }
+                }
+                else {
+                    if (skipMsg) {
+                        assert discardId != null;
+
+                        if (F.eq(discardId, msg0.id()))
+                            skipMsg = false;
+                        else
+                            msgIt.remove();
+
+                        continue;
+                    }
+                }
+
+                break;
+            }
         }
 
         /**
